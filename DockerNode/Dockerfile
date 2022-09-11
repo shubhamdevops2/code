@@ -1,16 +1,16 @@
 FROM node
 LABEL maintainer="Shubham Kawale <shubham.devops.2@gmail.com>"
 
-#ARG SERVICE_NAME="myapp-0.0.7-SNAPSHOT"
 RUN apt-get update && apt-get -y upgrade
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+#COPY ["package.json", "package-lock.json*", "./"]
 
-#ADD "target/*.war" "$CATALINA_HOME/webapps/myapp.war"
+ADD "*.tgz" "$PWD/"
+RUN tar -xvfz *.tgz
+WORKDIR /app/package
+
 RUN npm install
-
-COPY . .
 
 CMD ["node","app.js"]
