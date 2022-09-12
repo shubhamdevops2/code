@@ -7,8 +7,11 @@ WORKDIR /app
 
 #COPY ["package.json", "package-lock.json*", "./"]
 
-ADD "*.tgz" "$PWD/"
-RUN tar -xvfz *.tgz
+COPY *.tgz .
+
+RUN ls -al
+
+RUN tar -xvf *.tgz
 WORKDIR /app/package
 
 RUN npm install
